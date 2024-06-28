@@ -1,22 +1,14 @@
-import PostItemCoponent from "@/components/PostItem";
 
-
-async function getPost() {
-  const post = await fetch("https://jsonplaceholder.typicode.com/posts")
-  if (!post.ok){
-    throw new Error("Error el hacer la petición")
-  }
-  return post.json()
-}
-
+import PostList from "@/components/PostList";
+import GetApiInfo from "@/lib/fetch";
 
 export default async function Home() {
-
-  const data = await getPost()
+  const data = await GetApiInfo.getPostList();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    <PostItemCoponent post={data} />
+      <h1 className="text-4xl font-bold">Blog</h1>
+    <PostList post={data} />
     </main>
   );
 }
